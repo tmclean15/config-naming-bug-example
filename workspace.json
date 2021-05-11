@@ -28,7 +28,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/config-naming-bug-example",
             "index": "apps/config-naming-bug-example/src/index.html",
@@ -39,18 +41,14 @@
               "apps/config-naming-bug-example/src/favicon.ico",
               "apps/config-naming-bug-example/src/assets"
             ],
-            "styles": ["apps/config-naming-bug-example/src/styles.css"],
+            "styles": [
+              "apps/config-naming-bug-example/src/styles.css"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
           "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/config-naming-bug-example/src/environments/environment.ts",
-                  "with": "apps/config-naming-bug-example/src/environments/environment.prod.ts"
-                }
-              ],
+            "staging": {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -63,6 +61,34 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/client/src/environments/environment.ts",
+                  "with": "apps/client/src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/client/src/environments/environment.ts",
+                  "with": "apps/client/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -89,7 +115,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/config-naming-bug-example"],
+          "outputs": [
+            "coverage/apps/config-naming-bug-example"
+          ],
           "options": {
             "jestConfig": "apps/config-naming-bug-example/jest.config.js",
             "passWithNoTests": true
