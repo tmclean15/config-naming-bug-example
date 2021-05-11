@@ -1,0 +1,129 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "defaultProject": "config-naming-bug-example",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "projects": {
+    "config-naming-bug-example": {
+      "root": "apps/config-naming-bug-example",
+      "sourceRoot": "apps/config-naming-bug-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/config-naming-bug-example",
+            "index": "apps/config-naming-bug-example/src/index.html",
+            "main": "apps/config-naming-bug-example/src/main.tsx",
+            "polyfills": "apps/config-naming-bug-example/src/polyfills.ts",
+            "tsConfig": "apps/config-naming-bug-example/tsconfig.app.json",
+            "assets": [
+              "apps/config-naming-bug-example/src/favicon.ico",
+              "apps/config-naming-bug-example/src/assets"
+            ],
+            "styles": ["apps/config-naming-bug-example/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/config-naming-bug-example/src/environments/environment.ts",
+                  "with": "apps/config-naming-bug-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "config-naming-bug-example:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "config-naming-bug-example:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/config-naming-bug-example/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/config-naming-bug-example"],
+          "options": {
+            "jestConfig": "apps/config-naming-bug-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "config-naming-bug-example-e2e": {
+      "root": "apps/config-naming-bug-example-e2e",
+      "sourceRoot": "apps/config-naming-bug-example-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/config-naming-bug-example-e2e/cypress.json",
+            "tsConfig": "apps/config-naming-bug-example-e2e/tsconfig.e2e.json",
+            "devServerTarget": "config-naming-bug-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "config-naming-bug-example:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/config-naming-bug-example-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
